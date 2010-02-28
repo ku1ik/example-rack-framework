@@ -1,13 +1,22 @@
-!SLIDE
+!SLIDE first
 
-# Easy building of ruby web frameworks with Rack
+# _Easy building of ruby web frameworks with Rack_
+
+<br/>
+<br/>
+
+Marcin Kulik
+
+marcin.kulik@gmail.com
+
+2010/03/01
 
 !SLIDE big
 
 ## Presentation plan
 
  * Few words about Rack
- * Framework vision
+ * "Foobar" framework vision
  * Implementation
  * Q&A
 
@@ -23,61 +32,34 @@
 
 # "Foobar" framework vision
 
-## MVCRails/Merb-like framework + REST
+!SLIDE
 
-## Features we need
+## "Foobar" framework vision
+
+MVC, Rails/Merb-like framework
+
+Features we'd like to have:
 
  * gem dependency management
- * routing
+ * RESTful routing
  * controllers
  * views (layouts, templates and partials)
- * basic helpers (redirects, flash[], session[], headers[])
+ * basic controller methods (redirects, flash[], session[], headers[])
  * models (ORM)
  * authentication
-
-!SLIDE medium
-
-## Application directory structure
-
-@@@
-  +app
-    +controllers
-    +models
-    +views
-  +config
-  +lib
-   config.ru
-   Gemfile
-@@@
 
 !SLIDE
 
 # Implementation
 
-## Request flow
-
-## Implementing particular features
-
-!SLIDE big
+!SLIDE
 
 ## Request flow
 
 @@@
     HTTP request -> Rack -> router (config.ru) -> controller
-    controller (generates response) -> rack -> HTTP response
+    controller (generates response) -> Rack -> HTTP response
 @@@
-
-!SLIDE
-
-## Implementing particular features
-
- * gem dependency management
- * routing
- * controllers
- * views (layouts, templates and partials)
- * basic helpers (redirects, flash[], session[], headers[])
- * models (ORM)
- * authentication
 
 !SLIDE
 
@@ -96,7 +78,7 @@
 
 ## bundler
 
-"A gem to bundle gems"
+_"A gem to bundle gems"_
 
 [github.com/carlhuda/bundler](http://github.com/carlhuda/bundler)
 
@@ -123,7 +105,7 @@
 
 ## Usher
 
-"Pure ruby general purpose router with interfaces for rails, rack, email or choose your own adventure"
+_"Pure ruby general purpose router with interfaces for rails, rack, email or choose your own adventure"_
 
 [github.com/joshbuddy/usher](http://github.com/joshbuddy/usher)
 
@@ -170,7 +152,10 @@
 
 !SLIDE
 
-założenia
+## Let's build our "base" controller
+
+ * value returned from action becomes "body" of the response
+ * every action is valid Rack endpoint
 
 !SLIDE small
 
@@ -218,13 +203,27 @@ założenia
 
 !SLIDE
 
+## Example controller
+
+@@@ ruby
+    # app/controllers/users_controller.rb
+
+    class UsersController < Foobar::BaseController
+      def index
+        "Hello there!"
+      end
+    end
+@@@
+
+!SLIDE
+
 # (4/7) Views
 
 !SLIDE
 
 ## Tilt
 
-"Generic interface to multiple Ruby template engines"
+_"Generic interface to multiple Ruby template engines"_
 
 [github.com/rtomayko/tilt](http://github.com/rtomayko/tilt)
 
@@ -277,9 +276,24 @@ założenia
     end
 @@@
 
-!SLIDE big
+!SLIDE medium
+
+## Example of rendering template
+
+@@@ ruby
+    # app/controllers/users_controller.rb
+    
+    class UsersController < Foobar::BaseController
+      def index
+        @users = User.all
+        render
+      end
+    end
+@@@
 
 @@@ rhtml
+    <!-- app/views/users/index.html.erb -->
+    
     <h2>Users list</h2>
     
     <% @users.each do |user| %>
@@ -289,30 +303,30 @@ założenia
 
 !SLIDE
 
-# (5/7) Basic helpers
+# (5/7) Basic controller methods
 
 !SLIDE
 
-## Basic stuff like:
+## We need stuff like this:
 
- * session[]
- * flash[]
- * redirect_to
- * link_to
- * url(:foo)
- * headers[]
+ * `session[]`
+ * `flash[]`
+ * `redirect_to`
+ * `link_to`
+ * `url(:foo)`
+ * `headers[]`
  
 !SLIDE
 
 ## rack-contrib
 
-"Contributed Rack Middleware and Utilities"
+_"Contributed Rack Middleware and Utilities"_
 
 [github.com/rack/rack-contrib](http://github.com/rack/rack-contrib)
 
 ## rack-flash
 
-"Simple flash hash implementation for Rack apps"
+_"Simple flash hash implementation for Rack apps"_
 
 [nakajima.github.com/rack-flash](http://nakajima.github.com/rack-flash/)
 
@@ -391,6 +405,25 @@ założenia
     end
 @@@
 
+!SLIDE medium
+
+## Example use of #session, #flash and #redirect
+
+@@@ ruby
+    # app/controllers/users_controller.rb
+    
+    class UsersController < Foobar::BaseController
+      def openid
+        if session["openid.url"]
+          flash[:notice] = "Cool!"
+          redirect_to "/cool"
+        else
+          render
+        end
+      end
+    end
+@@@
+
 !SLIDE
 
 # (6/7) Models
@@ -399,7 +432,7 @@ założenia
 
 ## DataMapper
 
-"DataMapper is a Object Relational Mapper written in Ruby. The goal is to create an ORM which is fast, thread-safe and feature rich."
+_"DataMapper is a Object Relational Mapper written in Ruby. The goal is to create an ORM which is fast, thread-safe and feature rich."_
 
 [datamapper.org](http://datamapper.org/)
 
@@ -434,7 +467,7 @@ założenia
 
 ## Warden
 
-"General Rack Authentication Framework"
+_"General Rack Authentication Framework"_
 
 [github.com/hassox/warden](http://github.com/hassox/warden)
 
@@ -521,12 +554,27 @@ założenia
     end
 @@@
 
-!SLIDE
+!SLIDE medium
+
+## Example of action requiring authenticated user
+
+@@@ ruby
+    # app/controllers/users_controller.rb
+    
+    class UsersController < Foobar::BaseController
+      def index
+        authenticate!
+        @users = User.all
+        render
+      end
+    end
+@@@
+
+!SLIDE last
 
 # That's it!
 
 Code & slides available at: [github.com/sickill/example-rack-framework](http://github.com/sickill/example-rack-framework)
 
-!SLIDE
-
 # Questions?
+

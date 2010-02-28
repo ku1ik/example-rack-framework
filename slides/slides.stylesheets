@@ -5,14 +5,23 @@ body #slides {
 body {
   background-color: #DDF;
   color: #333;
+  font-family: 'Trebuchet MS';
 }
 
 body #slides h1 {
   font-size: 2.5em;
+  margin-bottom: 20px;
+  text-shadow: #999 4px 4px 3px;
 }
 
 body #slides h2 {
   font-size: 1.8em;
+  margin-bottom: 15px;
+  text-shadow: #999 2px 2px 2px;
+}
+
+p {
+  margin-bottom: 15px;
 }
 
 /*div .code pre {
@@ -37,4 +46,16 @@ div.medium {
 
 div.big {
   font-size: 1.3em;
+}
+
+pre {
+    border-radius: 10px;
+    box-shadow: 0 0 15px #777;
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.first, .last {
+  text-align: center;
 }
