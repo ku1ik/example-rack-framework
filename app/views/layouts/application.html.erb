@@ -1,0 +1,16 @@
+<html>
+<head>
+</head>
+<body>
+  <h1><%= link_to('Heading', url(:root)) %></h1>
+    <div>
+      <% if current_user %>
+        Logged in as <%= current_user.name %> | <%= link_to 'Logout', url(:logout) %>
+      <% else %>
+        <%= link_to 'Login', url(:login) %>
+      <% end %>
+    </div>
+    <div><%= flash[:notice] %></div>
+    <%= yield %>
+  </body>
+</html>
