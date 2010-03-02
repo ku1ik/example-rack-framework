@@ -119,7 +119,7 @@ ul {
 .code .il { color: #009999 } /* Literal.Number.Integer.Long */
     </style>
     
-      <link rel="stylesheet" href="slides.stylesheets" type="text/css" media="screen" charset="utf-8" />
+      <link rel="stylesheet" href="/home/kill/code/example-rack-framework/slides/slides.stylesheets" type="text/css" media="screen" charset="utf-8" />
     
     <script type="text/javascript">
       /*!
@@ -4861,18 +4861,30 @@ jQuery.extend( jQuery.easing,
         
           <div class="">
             <div id="slide-3" class="content">
-              <h2>Rack is aaa....</h2>
+              <h2>Rack is a....</h2><ul>
+<li>ruby web applications interface</li>
+<li>library</li>
+</ul>
             </div>
           </div>
         
           <div class="">
             <div id="slide-4" class="content">
-              <h1>"Foobar" framework vision</h1>
+              <h2>Simplest Rack application</h2><div class="highlight ruby code highlight"><pre><span class="n">run</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">env</span><span class="o">|</span>
+  <span class="o">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"Content-type"</span> <span class="o">=&gt;</span> <span class="s2">"text/plain"</span> <span class="p">},</span> <span class="o">[</span><span class="s2">"Hello KRUG!"</span><span class="o">]]</span>
+<span class="k">end</span>
+</pre></div>
             </div>
           </div>
         
           <div class="">
             <div id="slide-5" class="content">
+              <h1>"Foobar" framework vision</h1>
+            </div>
+          </div>
+        
+          <div class="">
+            <div id="slide-6" class="content">
               <h2>"Foobar" framework vision</h2><p>MVC, Rails/Merb-like framework</p><p>Features we'd like to have:</p><ul>
 <li>gem dependency management</li>
 <li>RESTful routing</li>
@@ -4881,18 +4893,19 @@ jQuery.extend( jQuery.easing,
 <li>basic controller methods (redirects, flash[], session[], headers[])</li>
 <li>models (ORM)</li>
 <li>authentication</li>
+<li>console</li>
 </ul>
             </div>
           </div>
         
           <div class="">
-            <div id="slide-6" class="content">
+            <div id="slide-7" class="content">
               <h1>Implementation</h1>
             </div>
           </div>
         
           <div class="">
-            <div id="slide-7" class="content">
+            <div id="slide-8" class="content">
               <h2>Request flow</h2><pre><code>HTTP request -&gt; Rack -&gt; router (config.ru) -&gt; controller
 controller (generates response) -&gt; Rack -&gt; HTTP response
 </code></pre>
@@ -4900,7 +4913,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class="">
-            <div id="slide-8" class="content">
+            <div id="slide-9" class="content">
               <h2>Prerequisites</h2><div class="highlight ruby code highlight"><pre><span class="c1"># config.ru</span>
 <span class="no">APP_ROOT</span> <span class="o">=</span> <span class="o">::</span><span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="o">::</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">))</span>
 </pre></div>
@@ -4908,19 +4921,19 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class="">
-            <div id="slide-9" class="content">
-              <h1>(1/7) Gem dependency management</h1>
+            <div id="slide-10" class="content">
+              <h1>(1/8) Gem dependency management</h1>
             </div>
           </div>
         
           <div class="">
-            <div id="slide-10" class="content">
+            <div id="slide-11" class="content">
               <h2>bundler</h2><p><em>"A gem to bundle gems"</em></p><p><a href="http://github.com/carlhuda/bundler">github.com/carlhuda/bundler</a></p>
             </div>
           </div>
         
           <div class=" big">
-            <div id="slide-11" class="content">
+            <div id="slide-12" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># Gemfile</span>
 
 <span class="n">source</span> <span class="s2">"http://gemcutter.org"</span>
@@ -4936,19 +4949,19 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class="">
-            <div id="slide-12" class="content">
-              <h1>(2/7) Routing</h1>
+            <div id="slide-13" class="content">
+              <h1>(2/8) Routing</h1>
             </div>
           </div>
         
           <div class="">
-            <div id="slide-13" class="content">
+            <div id="slide-14" class="content">
               <h2>Usher</h2><p><em>"Pure ruby general purpose router with interfaces for rails, rack, email or choose your own adventure"</em></p><p><a href="http://github.com/joshbuddy/usher">github.com/joshbuddy/usher</a></p>
             </div>
           </div>
         
           <div class=" big">
-            <div id="slide-14" class="content">
+            <div id="slide-15" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># Gemfile</span>
 
 <span class="n">gem</span> <span class="s2">"usher"</span>
@@ -4963,7 +4976,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" medium">
-            <div id="slide-15" class="content">
+            <div id="slide-16" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># config/router.rb</span>
 
 <span class="k">module</span> <span class="nn">Foobar</span>
@@ -4987,13 +5000,13 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class="">
-            <div id="slide-16" class="content">
-              <h1>(3/7) Controllers</h1>
+            <div id="slide-17" class="content">
+              <h1>(3/8) Controllers</h1>
             </div>
           </div>
         
           <div class="">
-            <div id="slide-17" class="content">
+            <div id="slide-18" class="content">
               <h2>Let's build our "base" controller</h2><ul>
 <li>value returned from action becomes "body" of the response</li>
 <li>every action is valid Rack endpoint</li>
@@ -5002,7 +5015,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" small">
-            <div id="slide-18" class="content">
+            <div id="slide-19" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># lib/base_controller.rb</span>
 
 <span class="k">module</span> <span class="nn">Foobar</span>
@@ -5036,7 +5049,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" big">
-            <div id="slide-19" class="content">
+            <div id="slide-20" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># config.ru</span>
 
 <span class="nb">require</span> <span class="no">APP_ROOT</span> <span class="o">/</span> <span class="s2">"lib"</span> <span class="o">/</span> <span class="s2">"base_controller.rb"</span>
@@ -5048,7 +5061,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class="">
-            <div id="slide-20" class="content">
+            <div id="slide-21" class="content">
               <h2>Example controller</h2><div class="highlight ruby code highlight"><pre><span class="c1"># app/controllers/users_controller.rb</span>
 
 <span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">Foobar</span><span class="o">::</span><span class="no">BaseController</span>
@@ -5061,19 +5074,19 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class="">
-            <div id="slide-21" class="content">
-              <h1>(4/7) Views</h1>
+            <div id="slide-22" class="content">
+              <h1>(4/8) Views</h1>
             </div>
           </div>
         
           <div class="">
-            <div id="slide-22" class="content">
+            <div id="slide-23" class="content">
               <h2>Tilt</h2><p><em>"Generic interface to multiple Ruby template engines"</em></p><p><a href="http://github.com/rtomayko/tilt">github.com/rtomayko/tilt</a></p>
             </div>
           </div>
         
           <div class=" big">
-            <div id="slide-23" class="content">
+            <div id="slide-24" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># Gemfile</span>
 
 <span class="n">gem</span> <span class="s2">"tilt"</span>
@@ -5091,7 +5104,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" small">
-            <div id="slide-24" class="content">
+            <div id="slide-25" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># lib/rendering.rb</span>
 
 <span class="k">module</span> <span class="nn">Foobar</span>
@@ -5124,7 +5137,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" medium">
-            <div id="slide-25" class="content">
+            <div id="slide-26" class="content">
               <h2>Example of rendering template</h2><div class="highlight ruby code highlight"><pre><span class="c1"># app/controllers/users_controller.rb</span>
 
 <span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">Foobar</span><span class="o">::</span><span class="no">BaseController</span>
@@ -5145,13 +5158,13 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class="">
-            <div id="slide-26" class="content">
-              <h1>(5/7) Basic controller methods</h1>
+            <div id="slide-27" class="content">
+              <h1>(5/8) Basic controller methods</h1>
             </div>
           </div>
         
           <div class="">
-            <div id="slide-27" class="content">
+            <div id="slide-28" class="content">
               <h2>We need stuff like this:</h2><ul>
 <li><code>session[]</code></li>
 <li><code>flash[]</code></li>
@@ -5164,13 +5177,13 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class="">
-            <div id="slide-28" class="content">
+            <div id="slide-29" class="content">
               <h2>rack-contrib</h2><p><em>"Contributed Rack Middleware and Utilities"</em></p><p><a href="http://github.com/rack/rack-contrib">github.com/rack/rack-contrib</a></p><h2>rack-flash</h2><p><em>"Simple flash hash implementation for Rack apps"</em></p><p><a href="http://nakajima.github.com/rack-flash/">nakajima.github.com/rack-flash</a></p>
             </div>
           </div>
         
           <div class=" big">
-            <div id="slide-29" class="content">
+            <div id="slide-30" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># Gemfile</span>
 
 <span class="n">gem</span> <span class="s2">"rack-flash"</span>
@@ -5187,7 +5200,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" big">
-            <div id="slide-30" class="content">
+            <div id="slide-31" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># lib/base_controller.rb</span>
 
 <span class="k">module</span> <span class="nn">Foobar</span>
@@ -5202,7 +5215,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" verysmall">
-            <div id="slide-31" class="content">
+            <div id="slide-32" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># lib/basic_helpers.rb</span>
 
 <span class="k">module</span> <span class="nn">Foobar</span>
@@ -5248,7 +5261,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" medium">
-            <div id="slide-32" class="content">
+            <div id="slide-33" class="content">
               <h2>Example use of #session, #flash and #redirect</h2><div class="highlight ruby code highlight"><pre><span class="c1"># app/controllers/users_controller.rb</span>
 
 <span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">Foobar</span><span class="o">::</span><span class="no">BaseController</span>
@@ -5266,19 +5279,19 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class="">
-            <div id="slide-33" class="content">
-              <h1>(6/7) Models</h1>
+            <div id="slide-34" class="content">
+              <h1>(6/8) Models</h1>
             </div>
           </div>
         
           <div class="">
-            <div id="slide-34" class="content">
+            <div id="slide-35" class="content">
               <h2>DataMapper</h2><p><em>"DataMapper is a Object Relational Mapper written in Ruby. The goal is to create an ORM which is fast, thread-safe and feature rich."</em></p><p><a href="http://datamapper.org/">datamapper.org</a></p>
             </div>
           </div>
         
           <div class=" medium">
-            <div id="slide-35" class="content">
+            <div id="slide-36" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># Gemfile</span>
 
 <span class="n">gem</span> <span class="s2">"dm-core"</span>
@@ -5302,19 +5315,19 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class="">
-            <div id="slide-36" class="content">
-              <h1>(7/7) Authentication</h1>
+            <div id="slide-37" class="content">
+              <h1>(7/8) Authentication</h1>
             </div>
           </div>
         
           <div class="">
-            <div id="slide-37" class="content">
+            <div id="slide-38" class="content">
               <h2>Warden</h2><p><em>"General Rack Authentication Framework"</em></p><p><a href="http://github.com/hassox/warden">github.com/hassox/warden</a></p>
             </div>
           </div>
         
           <div class=" medium">
-            <div id="slide-38" class="content">
+            <div id="slide-39" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># Gemfile</span>
 
 <span class="n">gem</span> <span class="s2">"warden"</span>
@@ -5330,7 +5343,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" medium">
-            <div id="slide-39" class="content">
+            <div id="slide-40" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># lib/warden.rb</span>
 
 <span class="no">Warden</span><span class="o">::</span><span class="no">Manager</span><span class="o">.</span><span class="n">serialize_into_session</span> <span class="p">{</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span> <span class="p">}</span>
@@ -5347,7 +5360,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" big">
-            <div id="slide-40" class="content">
+            <div id="slide-41" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># app/models/user.rb</span>
 
 <span class="k">class</span> <span class="nc">User</span>
@@ -5363,7 +5376,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" big">
-            <div id="slide-41" class="content">
+            <div id="slide-42" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># lib/base_controller.rb</span>
 
 <span class="k">module</span> <span class="nn">Foobar</span>
@@ -5379,7 +5392,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" medium">
-            <div id="slide-42" class="content">
+            <div id="slide-43" class="content">
               <div class="highlight ruby code highlight"><pre><span class="c1"># lib/authentication.rb</span>
 
 <span class="k">module</span> <span class="nn">Foobar</span>
@@ -5402,7 +5415,7 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
           </div>
         
           <div class=" medium">
-            <div id="slide-43" class="content">
+            <div id="slide-44" class="content">
               <h2>Example of action requiring authenticated user</h2><div class="highlight ruby code highlight"><pre><span class="c1"># app/controllers/users_controller.rb</span>
 
 <span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">Foobar</span><span class="o">::</span><span class="no">BaseController</span>
@@ -5416,8 +5429,33 @@ controller (generates response) -&gt; Rack -&gt; HTTP response
             </div>
           </div>
         
+          <div class="">
+            <div id="slide-45" class="content">
+              <h1>(8/8) Console</h1>
+            </div>
+          </div>
+        
+          <div class="">
+            <div id="slide-46" class="content">
+              <h2>racksh (aka Rack::Shell)</h2><p><em>"<strong>racksh</strong> is a console for Rack based ruby web applications. It's like Rails' </em>script/console<em> or Merb's </em>merb -i<em>, but for any app built on Rack"</em></p><p><a href="http://github.com/sickill/racksh">github.com/sickill/racksh</a></p>
+            </div>
+          </div>
+        
+          <div class=" medium">
+            <div id="slide-47" class="content">
+              <h2>Installation</h2><pre><code>gem install racksh
+</code></pre><h2>Example racksh session</h2><pre><code>% racksh
+Rack::Shell v0.9.7 started in development environment.
+&gt;&gt; $rack.get "/"
+=&gt; #&lt;Rack::MockResponse:0xb68fa7bc @body="&lt;html&gt;...", @headers={"Content-Type"=&gt;"text/html", "Content-Length"=&gt;"1812"}, @status=200, ...
+&gt;&gt; User.count
+=&gt; 123
+</code></pre>
+            </div>
+          </div>
+        
           <div class=" last">
-            <div id="slide-44" class="content">
+            <div id="slide-48" class="content">
               <h1>That's it!</h1><p>Code &amp; slides available at: <a href="http://github.com/sickill/example-rack-framework">github.com/sickill/example-rack-framework</a></p><h1>Questions?</h1>
             </div>
           </div>

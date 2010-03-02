@@ -26,8 +26,21 @@ marcin.kulik@gmail.com
 
 !SLIDE
 
-## Rack is aaa....
+## Rack is a....
 
+ * ruby web applications interface
+ * library
+
+!SLIDE
+
+## Simplest Rack application
+
+@@@ ruby
+    run lambda do |env|
+      [200, { "Content-type" => "text/plain" }, ["Hello KRUG!"]]
+    end
+@@@
+ 
 !SLIDE
 
 # "Foobar" framework vision
@@ -47,6 +60,7 @@ Features we'd like to have:
  * basic controller methods (redirects, flash[], session[], headers[])
  * models (ORM)
  * authentication
+ * console
 
 !SLIDE
 
@@ -72,7 +86,7 @@ Features we'd like to have:
 
 !SLIDE
 
-# (1/7) Gem dependency management
+# (1/8) Gem dependency management
 
 !SLIDE
 
@@ -99,7 +113,7 @@ _"A gem to bundle gems"_
 
 !SLIDE
 
-# (2/7) Routing
+# (2/8) Routing
 
 !SLIDE
 
@@ -148,7 +162,7 @@ _"Pure ruby general purpose router with interfaces for rails, rack, email or cho
 
 !SLIDE
 
-# (3/7) Controllers
+# (3/8) Controllers
 
 !SLIDE
 
@@ -217,7 +231,7 @@ _"Pure ruby general purpose router with interfaces for rails, rack, email or cho
 
 !SLIDE
 
-# (4/7) Views
+# (4/8) Views
 
 !SLIDE
 
@@ -303,7 +317,7 @@ _"Generic interface to multiple Ruby template engines"_
 
 !SLIDE
 
-# (5/7) Basic controller methods
+# (5/8) Basic controller methods
 
 !SLIDE
 
@@ -426,7 +440,7 @@ _"Simple flash hash implementation for Rack apps"_
 
 !SLIDE
 
-# (6/7) Models
+# (6/8) Models
 
 !SLIDE
 
@@ -461,7 +475,7 @@ _"DataMapper is a Object Relational Mapper written in Ruby. The goal is to creat
 
 !SLIDE
 
-# (7/7) Authentication
+# (7/8) Authentication
 
 !SLIDE
 
@@ -568,6 +582,37 @@ _"General Rack Authentication Framework"_
         render
       end
     end
+@@@
+
+!SLIDE
+
+# (8/8) Console
+
+!SLIDE
+
+## racksh (aka Rack::Shell)
+
+_"**racksh** is a console for Rack based ruby web applications. It's like Rails' _script/console_ or Merb's _merb -i_, but for any app built on Rack"_
+
+[github.com/sickill/racksh](http://github.com/sickill/racksh)
+
+!SLIDE medium
+
+## Installation
+
+@@@
+    gem install racksh
+@@@
+
+## Example racksh session
+
+@@@
+    % racksh
+    Rack::Shell v0.9.7 started in development environment.
+    >> $rack.get "/"
+    => #<Rack::MockResponse:0xb68fa7bc @body="<html>...", @headers={"Content-Type"=>"text/html", "Content-Length"=>"1812"}, @status=200, ...
+    >> User.count
+    => 123
 @@@
 
 !SLIDE last
